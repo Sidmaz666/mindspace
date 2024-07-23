@@ -30,7 +30,7 @@ const backlog = () => {
 }
 
 app.use(express.static(path.join(__dirname,"client")))
-app.use(express.static('./client/img'))
+app.use("/img", express.static(path.join(__dirname,"img")))
 
 app.get("/", (req,res) => {
   res.status(200).sendFile(path.join(__dirname,"client","index.html"))
