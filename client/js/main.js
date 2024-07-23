@@ -100,7 +100,7 @@ function notify(message, iconClass="fa-regular fa-bell", timeout=8000){
             clearTimeout(TIMEOUT__)
         },timeout)
 
-        AUDIO.play().then(() => {
+        AUDIO && AUDIO.play().then(() => {
             console.log('Audio is playing');
         }).catch(error => {
             console.error('Error playing audio:', error);
