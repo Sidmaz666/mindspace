@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404</title>
+    <script src="./js/tailwind.js"></script>
+    <script src="./js/fontawesome.js"></script>
+    <link href="./css/daisy.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="relative h-screen w-screen overflow-hidden flex justify-center items-center flex-col">
+    <img src="./img/box_shape.svg" class="absolute object-contain top-0 left-0 translate-x-[-40%] h-full"/>
+    <img src="./img/box_shape.svg" class="absolute object-contain opacity-40 top-0 right-0 translate-x-[40%] h-full"/>
+    <span class="font-bold font-mono text-[#c936c5] text-6xl uppercase tracking-wider flex space-x-4 items-center">
+        <i class="fa-solid fa-bug"></i>  <span>error 404!</span>
+    </span>
+    <button
+    onclick="window.location.href = window.location.origin"
+    title="Go to Home!"
+    class="underline font-mono font-bold text-sm flex items-center uppercase space-x-2 mt-5 cursor-pointer">
+         <i class="fa-solid fa-dragon"></i> <span>Go Back!</span>
+    </button>
+</body>
+</html>

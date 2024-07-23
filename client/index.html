@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta 
+  			property="og:title" 
+  			content="Minspace ~ Multiplayer AI powered Quiz game"/>
+  		<meta 
+  			property="og:type" 
+  			content="website"/>
+  		<meta 
+  			property="og:image" 
+  			content="https://mindscpace.onrender.com/preview.png"/>
+  		<meta 
+  			property="og:url" 
+  			content="https://mindscpace.onrender.com"/>
+		<meta property="twitter:card" content="Minspace ~ Multiplayer AI powered Quiz game" />
+  		<meta 
+  			name="twitter:image" 
+  			content="https://mindscpace.onrender.com/preview.png"/>
+  		<meta 
+  			name="keywords" 
+  			content="ai quiz, mind game, game, multiplayer, multiplayer quiz, quiz"/>
+  		<meta 
+  			property="og:description" 
+  			content="Minspace ~ Multiplayer AI powered Quiz game"/>
+  		<meta 
+  			name="description" 
+  			content="Minspace ~ Multiplayer AI powered Quiz game"/>
+  		<meta 
+  			property="og:site_name" 
+  			content="Minspace ~ Multiplayer AI powered Quiz game"/>
+  		<meta 
+  			name="twitter:image:alt" 
+  			content="Minspace ~ Multiplayer AI powered Quiz game"/>
+    <link href="./css/daisy.css" rel="stylesheet" type="text/css" />
+    <link href="./css/loader.css" rel="stylesheet" type="text/css" />
+    <title>Mindscape</title>
+    <script src="./js/tailwind.js"></script>
+    <script src="./js/fontawesome.js"></script>
+    <script src="./js/socket.js"></script>   
+    <script src="./js/emoji_mart.js" defer></script> 
+    <script src="./js/main.js" defer></script>
+</head>
+<body>
+
+<main class="relative">
+    <section id="setup-page" class="flex h-screen w-screen justify-between
+    items-center bg-contain bg-no-repeat 
+    bg-[url('https://placehold.co/450x500/c936c5/190132?text=MINDSCAPE')]">
+
+    <div class="w-1/2 flex justify-center items-center h-full overflow-hidden relative">
+        <div class="flex justify-center w-full h-full items-start pt-8 -rotate-90 space-x-2">
+            <span class="h-0.5 w-full bg-[#190132] "></span>    
+            <span class="text-[#190132] font-mono w-auto whitespace-nowrap translate-y-[-12px]">A Quest fo Knowledge</span>    
+            <span class="h-0.5 w-full bg-[#190132]"></span> 
+        </div>
+
+        <div class="absolute right-8 flex space-x-2 rotate-90 w-full h-full">
+            <span class="h-0.5 w-full bg-[#c936c5] "></span>    
+            <div class="text-[#c936c5] font-mono w-auto whitespace-nowrap translate-y-[-18px] ">
+                <img id="user-image" src="https://robohash.org/random?set=set3" class="scale-[1.5] -rotate-90"/>
+            </div>    
+            <span class="h-0.5 w-full bg-[#c936c5]"></span> 
+        </div>
+
+        <div class="absolute right-0 top-0 flex flex-col justify-center items-center w-full h-full">
+            <div id="username-display" 
+            class="absolute hidden top-5 left-16 text-[#190132] 
+            font-mono font-bold tracking-wider
+            flex space-x-2 items-end"></div>
+                <div class="translate-y-14 flex items-end translate-x-[-15%] space-y-2">
+                    <input
+                        oninput="handle_username_input(this)"
+                            id="username-input"
+                            placeholder="USERNAME..." 
+                            class="border-b-2 border-l-2 bg-transparent border-[#190132] 
+                            placeholder:font-mono placeholder:font-bold text-[#190132]
+                            tracking-wider font-mono font-bold text-lg
+                            placeholder:tracking-wider placeholder:text-[#190132] px-2 outline-none"
+                        />
+                        <button 
+                        id="submit-username-btn"
+                        onclick="submit_username()"
+                        class="px-4 py-0.5 border-2 text-[#190132] 
+                        transition-all ease-in-out delay-100 hover:bg-[#190132] hover:text-[#c936c5]
+                        border-[#190132] text-xl font-mono font-bold uppercase tracking-wider">enter!</button>
+                </div>
+        </div>
+    </div>
+
+    <div class="w-1/2 flex justify-center items-center h-full overflow-hidden relative">
+        <div class="flex justify-center w-full h-full items-start pt-8 space-x-2 relative">
+          <span class="h-0.5 w-full bg-[#c936c5] "></span>       
+          <span class="w-0.5 h-full bg-[#c936c5] absolute top-0 right-5"></span>     
+          <span class="w-0.5 h-1/2 bg-[#c936c5] absolute top-0 right-10"></span>    
+             
+        </div> 
+
+        <div class="absolute top-16 -left-10
+            bg-[url('./img/box_shape.svg')] bg-no-repeat bg-contain
+            w-full h-full flex flex-col justify-start py-20 items-center">
+        </div>
+
+        <div class="absolute top-16 -left-10
+            w-full h-full flex flex-col justify-start items-start px-24 py-20 items-center">
+            <div class="flex 
+                w-full h-[calc(100%_-_30px)] 
+                justify-start p-2 px-16 flex-col
+                bg-[oklch(var(--b1)/0.85)] 
+                backdrop-blur-md rounded-lg justify-center items-center">
+                <div class="flex w-full">
+                <input id="room-id-input" 
+                class="border-2 bg-transparent border-[#c936c5] 
+                placeholder:font-mono placeholder:font-bold text-[#c936c5]
+                tracking-wider font-mono font-bold text-lg 
+                placeholder:tracking-wider placeholder:text-[#c936c5] 
+                px-2 pr-0 py-2 w-full outline-none"
+                placeholder="ROOM ID..."/>  
+                <button 
+                 onclick="gen_room()"
+                 class="p-2 text-[#c936c5] text-xl border-l-0 transition-all ease-in-out delay-100
+                 hover:bg-[#c936c5] hover:text-[#190132] border-2 border-[#c936c5]">
+                    <i class="fa-solid fa-dice"></i>
+                </button>
+                </div>
+
+                <button 
+                id="create-room-btn"
+                onclick="create_room()"
+                class="mt-5 w-full p-4 bg-[#c936c5] text-[#190132]
+                 transition-all ease-in-out delay-100
+                 hover:text-[#c936c5] hover:bg-transparent 
+                 border-2 border-[#c936c5] font-bold font-mono uppercase tracking-wider">
+                    Create Room
+                </button>
+                <button
+                id="join-room-btn"
+                onclick="join_room()"
+                class="mt-3 w-full p-4 bg-[#c936c5] text-[#190132] 
+                 transition-all ease-in-out delay-100
+                 hover:text-[#c936c5] hover:bg-transparent
+                 border-2 border-[#c936c5] font-bold font-mono uppercase tracking-wider">
+                    Join Room
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    </section>
+
+
+    <section id="game-page" class=" hidden flex w-screen h-screen">
+        <div class="bg-[url('./img/lines.svg')] bg-contain bg-center w-[500px]
+         max-w-[500px] h-full overflow-hidden relative border-r-2 border-[#c936c5]">
+            <div class="sticky top-0 bg-[#c936c5] text-[#190132] p-2 flex items-center">
+                <img id="user-status-img" src="https://robohash.org/random?set=set3" 
+                class="h-[60px] w-[60px] rounded-full border-2 border-[#190132] bg-[#190132]"/>
+                <div class="flex flex-col justify-start items-start space-y-2 pl-2">
+                    <span 
+                     id="user-status-name"
+                     class="font-mono font-bold tracking-wider uppercase px-2 rounded-full bg-[#190132] text-[#c936c5]">
+                        sidhartha
+                    </span>    
+                    <span id="user-status-status" class="text-xs font-mono font-bold tracking-wider uppercase">Not yet ready!</span>
+                </div>
+                <button
+                onclick="ready_player_signal()"
+                id="user-ready-btn" class="p-2 px-4 bg-[#190132] text-[#c936c5] ml-auto font-bold 
+                font-mono tracking-wider uppercase transition-all hover:bg-transparent hover:text-[#190132]
+                ease-in-out delay-100 border border-[#190132]">
+                <i class="fa-solid fa-rocket mt-2"></i>                
+                ready
+            </button>
+            </div>
+            <div class="border-b-2 border-[#c936c5] p-2 flex items-center justify-between">
+                   <span class="text-[#c936c5] font-mono font-bold tracking-wider uppercase">
+                    <i class="fa-solid fa-users"></i> 
+                        other participants
+                    </span> 
+                    <button 
+                    id="invite-btn"
+                    title="Share, Invite People"
+                    class="text-[#c936c5] px-2  transition-all ease-in-out delay-100 hover:brightness-105 hover:scale-[1.1]
+                    font-mono font-bold tracking-wider uppercase
+                    ">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+            </div>
+            <div 
+             id="participants-container"
+             class="w-full h-full max-h-full overflow-y-auto flex flex-col pb-10 no-scrollbar">
+                <span class="text-[#c936c5] font-mono w-full text-center py-4 font-bold tracking-wider uppercase">
+                    No participants!
+                </span>            
+            </div>
+
+        </div>
+        <div class="h-full w-full justify-between flex flex-col">
+            <div class="flex flex-col">
+                <div class="flex justify-between items-center">
+                        <div class="p-4 flex space-x-2 pl-4">
+                            <div class="relative">
+                                <button
+                                id="emoji_icon" 
+                                onclick="show_emoji()"
+                                >
+                                    <span
+                                    class="relative z-[9999] cursor-pointer px-2 py-[0.25rem]
+                                     rounded-full font-mono
+                                     font-bold tracking-wider bg-[#c936c5] text-[#190132]">
+                                            <i class="fa-regular fa-face-smile-beam"></i>
+                                </span>
+                                </button>
+
+                                <div
+                                id="emoji-picker-container"
+                                class="absolute z-[999] bottom-0 left-0 translate-y-[100%] pt-2 hidden">
+                                </div>
+                                </div>
+                            <span id="total-question"
+                             class="px-4 rounded-full font-mono font-bold tracking-wider bg-[#c936c5] text-[#190132]">
+                                0/0
+                            </span>
+                            <span id="topic-span" 
+                             class="px-4 rounded-full font-mono font-bold tracking-wider bg-[#c936c5] text-[#190132]">
+                                Question Topic : None
+                            </span>
+                            <button 
+                            onclick="ready_player_signal(false)"
+                            id="play-again-btn" 
+                            disabled="true"
+                            class="hidden px-4 rounded-full font-mono font-bold tracking-wider bg-[#c936c5] text-[#190132]">
+                                <i class="fa-solid fa-rotate"></i> Play Again!
+                            </button>
+                        </div>
+                        <button 
+                        title="Exit from game!"
+                        onclick="window.location.href = window.location.origin"
+                        class="uppercase cursor-pointer text-[#190132] bg-[#c936c5] pl-8 pr-2 py-2
+                         hover:brightness-105 transition-all ease-in-out delay-100
+                        [clip-path:_polygon(0_0,_100%_0%,_100%_100%,_48%_100%)] font-mono font-bold tracking-wider">
+                            exit
+                        </button>
+                </div>
+                <div id="emoji_drop" class="flex gap-2 flex-wrap px-4 max-h-[60px] overflow-y-hidden"></div>
+                <div
+                id="question-container"
+                class="flex flex-col justify-center w-full items-center h-[500px] max-h-[500px] overflow-y-hidden">
+                    <div class="pyramid-loader">
+                        <div class="wrapper">
+                          <span class="side side1"></span>
+                          <span class="side side2"></span>
+                          <span class="side side3"></span>
+                          <span class="side side4"></span>
+                          <span class="shadow"></span>
+                        </div>  
+                      </div>
+                      <span 
+                      class="-translate-y-32 text-lg font-bold font-mono text-[#c936c595] uppercase">
+                        get ready for some quest
+                    </span>
+                </div>
+            </div>
+            <div id="topic-input-container" class="flex w-full sticky bottom-0 pb-4 px-8">
+                <input placeholder="wait for your turn..."
+                 disabled="true"
+                 class="
+                 disabled:opacity-50
+                 p-2 w-full border-2 border-r-0 border-[#c936c5] outline-none font-mono font-bold text-[#c936c5]
+                 placeholder:font-mono placeholder:font-bold placeholder:text-[#c936c5] placeholder:uppercase
+                 uppercase bg-black/20 backdrop-blur-sm"/>
+                <button 
+                disabled="true"
+                class="
+                disabled:opacity-50 disabled:hover:bg-transparent
+                p-2 px-4 text-[#c936c5] border-2 border-[#c936c5] transition-all ease-in-out delay-100
+                hover:bg-[#190132] hover:text-[#c936c5]">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
