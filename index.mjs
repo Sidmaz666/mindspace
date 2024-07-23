@@ -49,8 +49,8 @@ socket.on("connection", (con) => {
 	      users:[{ username: data.username, score: 0, ready: false, sid: con.id}],  
         turn_counter: 0,
         session:{},
-        limit: 3, //[10,15,20,25,30][Math.floor(Math.random() * 5)],
-	      is_end: false
+        limit: 5, //[10,15,20,25,30][Math.floor(Math.random() * 5)],
+	is_end: false
       }
       questions[data.roomname] = {
         question_list: [],
@@ -87,7 +87,7 @@ socket.on("connection", (con) => {
 	    status:"success" , 
 	    message: `${data.username} Joined!`,
 	    username: data.username,
-      data: rooms[data.roomname]
+    	    data: rooms[data.roomname]
 	  })
     } else {
       con.emit('room_join_event',{
@@ -102,7 +102,7 @@ socket.on("connection", (con) => {
     //Reset
     if(rooms[room_id].is_end && data?.reset == true){
       rooms[room_id].session = {}
-      rooms[room_id].limit = 3 //[10,15,20,25,30][Math.floor(Math.random() * 5)]
+      rooms[room_id].limit = 5 //[10,15,20,25,30][Math.floor(Math.random() * 5)]
       rooms[room_id].is_end = false
       rooms[room_id].turn_counter = 0
       questions[room_id].current_question = {}
