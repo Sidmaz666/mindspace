@@ -82,7 +82,6 @@ function gen_room(){
 
 function notify(message, iconClass="fa-regular fa-bell", timeout=8000){
     let TIMEOUT__
-    AUDIO.play()
     if(document.querySelector(`#notification`)) document.querySelector(`#notification`).remove()
         document.querySelector('main').insertAdjacentHTML("beforeend",`
             <div
@@ -100,6 +99,12 @@ function notify(message, iconClass="fa-regular fa-bell", timeout=8000){
             if(document.querySelector(`#notification`)) document.querySelector(`#notification`).remove()
             clearTimeout(TIMEOUT__)
         },timeout)
+
+        AUDIO.play().then(() => {
+            console.log('Audio is playing');
+        }).catch(error => {
+            console.error('Error playing audio:', error);
+        });
 }
 
 function copy_link(text) {
