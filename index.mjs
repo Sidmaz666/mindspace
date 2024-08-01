@@ -212,7 +212,7 @@ socket.on("connection", (con) => {
         const current_turn = rooms[room_id].users[rooms[room_id].turn_counter]
         socket.to(room_id).emit("player_turn_event", {
           status: "success",
-          username:  current_turn.username
+          username:  current_turn && current_turn.username
         })
       },3000)
     } else {

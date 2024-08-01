@@ -1,4 +1,4 @@
-import { Client } from "@gradio/client";
+import { Client, client } from "@gradio/client";
 
 
 const DUMMY_QUESIONS = [
@@ -127,12 +127,16 @@ async function question(topic, maxRetries = 3, retryDelay = 500) {
         "randyammar/gemma-2-9b-it-GGUF"
     ];
 
-    for (let clientName of clients) {
-        const client = await Client.connect(clientName);
+    const qwen = await Qwen(topic)
+    if(qwen){
+      return qwen
+    }
 
+    for (let clientName of clients) {
+        const app = await Client.connect(clientName);
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
             try {
-                const result = await client.predict("/chat", {
+                const result = await app.predict("/chat", {
                     message: topic,
                     model: "gemma-2-27b-it-Q5_K_M.gguf",
                     system_message: SYSTEM_MESSAGE,
@@ -142,7 +146,6 @@ async function question(topic, maxRetries = 3, retryDelay = 500) {
                     top_k: 40,
                     repeat_penalty: 1.1,
                 });
-
                 return JSON.parse(result.data[0].replace("```json\n", "").replace("\n```", ""));
             } catch (error) {
                 if (attempt === maxRetries) {
@@ -153,8 +156,24 @@ async function question(topic, maxRetries = 3, retryDelay = 500) {
             }
         }
     }
-    
     return DUMMY_QUESIONS[Math.floor(Math.random() * DUMMY_QUESIONS.length)];
+}
+
+async function Qwen(topic){
+	try {
+           const app = await client("Qwen/Qwen1.5-110B-Chat-demo")
+	    const result = await app.predict("/model_chat", [
+	      topic,
+	       [], 
+	      `${SYSTEM_MESSAGE}
+	       Each Questions should be unique.
+	       This is the random seed number ${Math.floor(Math.random() * 5555)} that will determine the randomness and uniqueness of the questions. 
+	      `, 
+	    ]);
+	    return JSON.parse(result.data[1][0].reverse()[0]);
+	} catch (error) {
+	  	return false
+	}
 }
 
 export default question;
